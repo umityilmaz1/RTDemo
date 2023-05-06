@@ -11,7 +11,7 @@ namespace Core.DataAccess
         int Delete(TEntity entity);
         void RemoveRange(IList<TEntity> entities);
         TEntity Get(Expression<Func<TEntity, bool>> filter);
-        TEntity GetById(int id);
+        TEntity GetById(Guid id);
         IQueryable<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null);
     }
 }

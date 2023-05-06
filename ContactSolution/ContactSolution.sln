@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enums", "Enums\Enums.csproj", "{7DB1AB62-EB19-4FF9-BCE7-2B00DE1E2BBB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "DataAccess\Repository.csproj", "{A1749A88-2450-40F5-BBB0-557FEA969B94}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helper", "Helper\Helper.csproj", "{14BC3108-B57D-4263-9610-E2F42FFA0ED5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{7DB1AB62-EB19-4FF9-BCE7-2B00DE1E2BBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DB1AB62-EB19-4FF9-BCE7-2B00DE1E2BBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DB1AB62-EB19-4FF9-BCE7-2B00DE1E2BBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1749A88-2450-40F5-BBB0-557FEA969B94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1749A88-2450-40F5-BBB0-557FEA969B94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1749A88-2450-40F5-BBB0-557FEA969B94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1749A88-2450-40F5-BBB0-557FEA969B94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14BC3108-B57D-4263-9610-E2F42FFA0ED5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14BC3108-B57D-4263-9610-E2F42FFA0ED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14BC3108-B57D-4263-9610-E2F42FFA0ED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14BC3108-B57D-4263-9610-E2F42FFA0ED5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

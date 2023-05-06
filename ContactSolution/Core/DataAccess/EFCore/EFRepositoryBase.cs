@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 namespace Core.DataAccess.EntityFramework
 {
     public class EFRepositoryBase<TEntity, TContext> : IRepository<TEntity>
-        where TEntity : BaseEntity
+        where TEntity : BaseGuidEntity
         where TContext : DbContext, new()
     {
         TContext _context = EFContext<TContext>.GetInstance();
@@ -50,9 +50,9 @@ namespace Core.DataAccess.EntityFramework
             return filter == null ? _context.Set<TEntity>() : _context.Set<TEntity>().Where(filter);
         }
 
-        public TEntity GetById(int id)
+        public TEntity GetById(Guid id)
         {
-            return _context.Set<TEntity>().SingleOrDefault(a => a.ID == id);
+            return _context.Set<TEntity>().SingleOrDefault(a => a.Id == id);
         }
     }
 }
