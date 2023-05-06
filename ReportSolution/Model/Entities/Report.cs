@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Enums;
+using Model.Base;
 
 namespace Model.Entities
 {
-    internal class ReportStatus
+    public class Report : BaseGuidEntity
     {
+        public Guid RequesterId { get; set; }
+        public DateTime RequestDate { get; set; }
+        public ReportStatus status { get; set; }
+        public string Location { get; set; }
+        public int ContactCount { get; set; }
+        public int PhoneNumberCount { get; set; }
     }
 }

@@ -4,11 +4,11 @@ using Model.Entities;
 
 namespace Repository.Context.Configurations
 {
-    public class ReportConfiguration : IEntityTypeConfiguration<ContactInformation>
+    public class ReportConfiguration : IEntityTypeConfiguration<Report>
     {
-        public void Configure(EntityTypeBuilder<ContactInformation> builder)
+        public void Configure(EntityTypeBuilder<Report> builder)
         {
-            builder.HasOne(a => a.Contact).WithMany(a => a.ContactInformations).HasForeignKey(x => x.ContactId);
+
         }
     }
 }

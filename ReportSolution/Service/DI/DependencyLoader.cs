@@ -10,7 +10,6 @@ namespace Service.DI
         {
             Repository.DI.DependencyLoader.Load(services);
 
-            services.AddSingleton<IContactService, ContactService>();
             services.AddSingleton<IReportService, ReportService>();
         }
     }

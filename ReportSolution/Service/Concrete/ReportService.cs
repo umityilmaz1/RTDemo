@@ -7,48 +7,44 @@ namespace Service.Concrete
 {
     internal class ReportService : IReportService
     {
-        IContactInformationRepository _contactInformationRepository;
-        public ReportService(IContactInformationRepository contactInformationRepository)
+        IReportRepository _reportRepository;
+        public ReportService(IReportRepository reportRepository)
         {
-            _contactInformationRepository = contactInformationRepository;
+            _reportRepository = reportRepository;
         }
-        public int Create(ContactInformation entity)
+        public int Create(Report entity)
         {
-            return _contactInformationRepository.Create(entity);
-        }
-        public int CreateRange(IList<ContactInformation> entities)
-        {
-            return _contactInformationRepository.CreateRange(entities);
+            return _reportRepository.Create(entity);
         }
 
-        public int Update(ContactInformation entity)
+        public int Update(Report entity)
         {
-            return _contactInformationRepository.Update(entity);
+            return _reportRepository.Update(entity);
         }
 
-        public int Delete(ContactInformation entity)
+        public int Delete(Report entity)
         {
-            return _contactInformationRepository.Delete(entity);
+            return _reportRepository.Delete(entity);
         }
 
-        public void RemoveRange(IList<ContactInformation> entities)
+        public void RemoveRange(IList<Report> entities)
         {
-            _contactInformationRepository.RemoveRange(entities);
+            _reportRepository.RemoveRange(entities);
         }
         
-        public ContactInformation Get(Expression<Func<ContactInformation, bool>> filter)
+        public Report Get(Expression<Func<Report, bool>> filter)
         {
-            return _contactInformationRepository.Get(filter);
+            return _reportRepository.Get(filter);
         }
 
-        public IQueryable<ContactInformation> GetList(Expression<Func<ContactInformation, bool>> filter = null)
+        public IQueryable<Report> GetList(Expression<Func<Report, bool>> filter = null)
         {
-            return _contactInformationRepository.GetList(filter);
+            return _reportRepository.GetList(filter);
         }
 
-        public ContactInformation GetById(Guid id)
+        public Report GetById(Guid id)
         {
-            return _contactInformationRepository.GetById(id);
+            return _reportRepository.GetById(id);
         }
     }
 }

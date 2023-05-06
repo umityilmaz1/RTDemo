@@ -2,7 +2,7 @@
 
 namespace Service.Abstract
 {
-    public interface IReportService : IBaseService<ContactInformation>
+    public interface IReportService : IBaseService<Report>
     {
     }
 }

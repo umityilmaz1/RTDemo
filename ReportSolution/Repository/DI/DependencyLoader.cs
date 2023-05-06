@@ -8,7 +8,6 @@ namespace Repository.DI
     {
         public static void Load(IServiceCollection services) 
         {
-            services.AddSingleton<IContactRepository, ContactRepository>();
             services.AddSingleton<IReportRepository, ReportRepository>();
         }
     }

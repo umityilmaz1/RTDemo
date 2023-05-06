@@ -36,7 +36,6 @@ namespace Repository.Context
         {
             builder.ApplyConfigurationsFromAssembly(typeof(RTDemoContext).Assembly);
             builder.ApplyConfiguration(new ReportConfiguration());
-            builder.ApplyConfiguration(new ContactConfiguration());
             builder.Seed();
             base.OnModelCreating(builder);
         }
@@ -66,7 +65,6 @@ namespace Repository.Context
             }
         }
 
-        public DbSet<Contact> Contacts { get; set; }
-        public DbSet<ContactInformation> ContactInformations { get; set; }
+        public DbSet<Report> Reports { get; set; }
     }
 }

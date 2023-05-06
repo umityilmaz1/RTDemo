@@ -3,7 +3,7 @@ using Model.Entities;
 
 namespace Repository.Abstract
 {
-    public interface IReportRepository : IRepository<ContactInformation>
+    public interface IReportRepository : IRepository<Report>
     {
     }
 }
