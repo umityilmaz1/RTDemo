@@ -1,4 +1,5 @@
 ﻿using Castle.Core.Configuration;
+using Core.DataAccess.EntityFramework;
 using Helper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +15,16 @@ namespace Repository.Context
         private string _createDateString = "CreatedDate";
         private string _updateDateString = "UpdatedDate";
 
+        public RTDemoContext()
+        {
+            
+        }
+
+        //public RTDemoContext(DbContextOptions options)
+        //{
+            
+        //}
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
@@ -23,6 +34,7 @@ namespace Repository.Context
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfigurationsFromAssembly(typeof(RTDemoContext).Assembly);
             builder.ApplyConfiguration(new ContactInformationConfiguration());
             builder.ApplyConfiguration(new ContactConfiguration());
             builder.Seed();

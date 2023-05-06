@@ -7,6 +7,7 @@ namespace Model.Entities
     {
         public ContactInformationType Type { get; set; }
         public string Content { get; set; }
+        public Guid? ContactId { get; set; }
         public virtual Contact Contact { get; set; }
     }
 }

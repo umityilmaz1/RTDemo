@@ -8,7 +8,7 @@ namespace Repository.Context.Configurations
     {
         public void Configure(EntityTypeBuilder<ContactInformation> builder)
         {
-
+            builder.HasOne(a => a.Contact).WithMany(a => a.ContactInformations).HasForeignKey(x => x.ContactId);
         }
     }
 }

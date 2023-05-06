@@ -5,7 +5,7 @@ using Repository.Context;
 
 namespace Repository.Concrete
 {
-    public class ContactInformationRepository : EFRepositoryBase<ContactInformation, RTDemoContext>, IContactInformationRepository
+    internal class ContactInformationRepository : EFRepositoryBase<ContactInformation, RTDemoContext>, IContactInformationRepository
     {             
         
     }

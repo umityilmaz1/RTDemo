@@ -9,11 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{496ADE76-1AD2-474B-8631-8EDA4588E373}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enums", "Enums\Enums.csproj", "{7DB1AB62-EB19-4FF9-BCE7-2B00DE1E2BBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enums", "Enums\Enums.csproj", "{7DB1AB62-EB19-4FF9-BCE7-2B00DE1E2BBB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "DataAccess\Repository.csproj", "{A1749A88-2450-40F5-BBB0-557FEA969B94}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helper", "Helper\Helper.csproj", "{14BC3108-B57D-4263-9610-E2F42FFA0ED5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{B2D6BC4A-68E2-43AF-B2B5-E2B8D71BC57A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{14BC3108-B57D-4263-9610-E2F42FFA0ED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14BC3108-B57D-4263-9610-E2F42FFA0ED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14BC3108-B57D-4263-9610-E2F42FFA0ED5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2D6BC4A-68E2-43AF-B2B5-E2B8D71BC57A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2D6BC4A-68E2-43AF-B2B5-E2B8D71BC57A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2D6BC4A-68E2-43AF-B2B5-E2B8D71BC57A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2D6BC4A-68E2-43AF-B2B5-E2B8D71BC57A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

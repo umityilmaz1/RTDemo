@@ -2,8 +2,8 @@
 {
     public enum ContactInformationType
     {
-        Phone = 2,
-        Email = 1,
+        Phone = 1,
+        Email = 2,
         Location = 3
     }
 }
