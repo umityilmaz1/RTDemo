@@ -1,4 +1,5 @@
 ﻿using Api.Model.Contact;
+using Api.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Model.Entities;
@@ -77,6 +78,26 @@ namespace Api.Controllers
             IList<Contact> contacts = _contactService.GetList().ToList();
             IList<ContactListWithContactInformationsDto> contactsDto = _mapper.Map<IList<ContactListWithContactInformationsDto>>(contacts);
             return new JsonResult(contactsDto);
+        }
+
+        [HttpGet(nameof(GetReport))]
+        public IActionResult GetReport() 
+        {
+            IList<Contact> contacts = _contactService.GetList().ToList();
+            IList<string> locations = contacts.Select(a => a.Company).Distinct().ToList();
+            List<ReportDetailDto> reportDatas = new();
+
+            foreach (string location in locations)
+            {
+                ReportDetailDto data = new()
+                {
+                    Location = location,
+                    ContactCount = contacts.Count(a => a.Company == location),
+                    PhoneNumberCount = contacts.Sum(a => a.ContactInformations.Count(b => b.Type == Enums.ContactInformationType.Phone))
+                };
+            }
+
+            return new JsonResult(reportDatas);
         }
     }
 }
