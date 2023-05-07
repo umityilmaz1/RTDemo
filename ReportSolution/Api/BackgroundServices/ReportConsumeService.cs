@@ -82,7 +82,7 @@ namespace Api.BackgroundServices
                         workBook.SaveAs($"{path}/report_{reportId}.xlsx");
 
                         Report report = _reportService.GetById(Guid.Parse(reportId));
-                        report.status = ReportStatus.Completed;
+                        report.Status = ReportStatus.Completed;
                         _reportService.Update(report);
                     }
 

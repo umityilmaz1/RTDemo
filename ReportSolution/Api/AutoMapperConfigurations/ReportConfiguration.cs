@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using Api.Models;
+using AutoMapper;
+using Model.Entities;
 
 namespace Api.AutoMapperConfigurations
 {
@@ -6,7 +8,7 @@ namespace Api.AutoMapperConfigurations
     {
         public ReportConfiguration()
         {
-
+            CreateMap<Report, ReportListDto>().ReverseMap();
         }
     }
 }
