@@ -1,5 +1,7 @@
 ﻿using Api.Models;
 using AutoMapper;
+using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.AspNetCore.Mvc;
 using Model.Entities;
 using Service.Abstract;
@@ -45,9 +47,27 @@ namespace Api.Controllers
         [HttpGet(nameof(GetReportsWithReportInformations))]
         public IActionResult GetReportsWithReportInformations(Guid reportId)
         {
-            Report report = _reportService.GetById(reportId);
-            ReportDetailDto detailDto = _mapper.Map<ReportDetailDto>(report);
-            return new JsonResult(detailDto);
+            string path = AppDomain.CurrentDomain.BaseDirectory + "reports";
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+            using var workBook = new XLWorkbook($"{path}/report_{reportId}.xlsx");
+            var workSheet = workBook.Worksheet("Rapor");
+            int lastrow = workSheet.LastRowUsed().RowNumber();
+            var rows = workSheet.Rows(2, lastrow);
+
+            List<ReportDetailDto> report = new();
+
+            foreach (IXLRow row in rows)
+            {
+                ReportDetailDto reportData = new();
+                reportData.Location = row.Cell(1).Value.GetText();
+                reportData.ContactCount = Convert.ToInt32(row.Cell(2).GetString());
+                reportData.PhoneNumberCount = Convert.ToInt32(row.Cell(3).GetString());
+
+                report.Add(reportData);
+            }
+
+            return new JsonResult(report);
         }
     }
 }
