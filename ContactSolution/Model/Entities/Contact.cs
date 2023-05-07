@@ -10,7 +10,7 @@ namespace Model.Entities
         }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Company { get; set; }
+        public string Location { get; set; }
         public virtual HashSet<ContactInformation> ContactInformations { get; set; }
     }
 }
