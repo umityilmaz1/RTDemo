@@ -80,17 +80,24 @@ namespace Api.Controllers
             return new JsonResult(contactsDto);
         }
 
-        [HttpGet($"{nameof(GetReport)}/{{location}}")]
-        public IActionResult GetReport(string location)
+        [HttpGet(nameof(GetReport))]
+        public IActionResult GetReport()
         {
-            IList<Contact> contacts = _contactService.GetList(a => a.Location == location).ToList();
+            IList<Contact> contacts = _contactService.GetList().ToList();
+            IList<string> locations = contacts.Select(a => a.Location).Distinct().ToList();
+            List<ReportDetailDto> reportData = new();
 
-            ReportDetailDto reportData = new()
+            foreach (string location in locations)
             {
-                Location = location,
-                ContactCount = contacts.Count(),
-                PhoneNumberCount = contacts.Sum(a => a.ContactInformations.Count(b => b.Type == Enums.ContactInformationType.Phone))
-            };
+                IList<Contact> contactInSpesificLocation = contacts.Where(a => a.Location == location).ToList();
+                ReportDetailDto data = new()
+                {
+                    Location = location,
+                    ContactCount = contactInSpesificLocation.Count(),
+                    PhoneNumberCount = contactInSpesificLocation.Sum(a => a.ContactInformations.Count(b => b.Type == Enums.ContactInformationType.Phone))
+                };
+                reportData.Add(data);
+            }
 
             return new JsonResult(reportData);
         }
