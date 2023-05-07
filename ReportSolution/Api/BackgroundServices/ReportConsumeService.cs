@@ -53,9 +53,10 @@ namespace Api.BackgroundServices
                 try
                 {
 
-                    var client = new RestClient("localhost:5164");
-                    var request = new RestRequest($"api/contact/getreport/{reportId}", Method.Get);
-                    var queryResult = client.Execute<ReportDetailDto>(request).Data;
+                    var client = new RestClient("http://localhost:5164");
+                    var request = new RestRequest($"/api/contact/getreport/{reportId}", Method.Get);
+                    var a = client.Execute<ReportDetailDto>(request);
+                    var queryResult = a.Data;
 
                     if (queryResult != null)
                     {

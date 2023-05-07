@@ -15,15 +15,8 @@ namespace Repository.Context
         private string _createDateString = "CreatedDate";
         private string _updateDateString = "UpdatedDate";
 
-        public RTDemoContext()
-        {
-            
-        }
-
-        //public RTDemoContext(DbContextOptions options)
-        //{
-            
-        //}
+        public RTDemoContext() { }
+        public RTDemoContext(DbContextOptions<RTDemoContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
