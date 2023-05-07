@@ -1,11 +1,10 @@
-﻿using Newtonsoft.Json;
-using RabbitMQ.Client;
+﻿using RabbitMQ.Client;
 using Service.Abstract;
 using System.Text;
 
 namespace Service.Concrete
 {
-    public class RabbitmqProducerService : IRabbitmqProducerService
+    internal class RabbitmqProducerService : IRabbitmqProducerService
     {
         public void SendProductMessage<T>(T message)
         {
