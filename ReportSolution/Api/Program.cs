@@ -1,4 +1,5 @@
 using Api.AutoMapperConfigurations;
+using Api.BackgroundServices;
 using Microsoft.EntityFrameworkCore;
 using Repository.Context;
 
@@ -18,7 +19,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<RTDemoContext>(opt => opt.UseNpgsql(builder.Configuration.GetConnectionString(_defaultConnectionString)));
 
+builder.Services.AddHostedService<ReportConsumeService>();
 var app = builder.Build();
+
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 using (var scope = app.Services.CreateScope())
 {

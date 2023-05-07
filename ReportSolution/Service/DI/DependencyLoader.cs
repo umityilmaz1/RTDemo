@@ -11,7 +11,7 @@ namespace Service.DI
             Repository.DI.DependencyLoader.Load(services);
 
             services.AddSingleton<IReportService, ReportService>();
-            services.AddSingleton<IRabbitmqProducerService, RabbitmqProducerService>();
+            services.AddSingleton<IRabbitmqService, RabbitmqService>();
         }
     }
 }
