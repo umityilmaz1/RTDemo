@@ -25,14 +25,10 @@ namespace Api.Controllers
         }
 
         [HttpPost(nameof(RequestReport))]
-        public IActionResult RequestReport(Guid contactId)
+        public IActionResult RequestReport()
         {
-            Report report = new() 
-            { 
-                RequesterId = contactId
-            };
+            Report report = new();
             _reportService.Create(report);
-
             _rabbitmqProducerService.ProduceMessage(report.Id);
             return Ok();
         }

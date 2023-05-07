@@ -1,10 +1,9 @@
 ﻿using Api.Models;
 using ClosedXML.Excel;
-using Helper;
-using Newtonsoft.Json;
+using Enums;
+using Model.Entities;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using RabbitMQ.Client.Exceptions;
 using RestSharp;
 using Service.Abstract;
 using System.Text;
@@ -50,29 +49,41 @@ namespace Api.BackgroundServices
             consumer.Received += async (bc, ea) =>
             {
                 var reportId = Encoding.UTF8.GetString(ea.Body.ToArray());
+                
                 try
                 {
 
                     var client = new RestClient("http://localhost:5164");
-                    var request = new RestRequest($"/api/contact/getreport/{reportId}", Method.Get);
-                    var a = client.Execute<ReportDetailDto>(request);
-                    var queryResult = a.Data;
+                    var request = new RestRequest($"/api/contact/getreport", Method.Get);
+                    var reportData = client.Execute<List<ReportDetailDto>>(request).Data;
 
-                    if (queryResult != null)
+                    if (reportData != null)
                     {
                         using var workBook = new XLWorkbook();
                         var workSheet = workBook.AddWorksheet("Rapor");
-                        workSheet.Cell("A1").Value = "Location";
-                        workSheet.Cell("A2").Value = "ContactCount";
-                        workSheet.Cell("A3").Value = "PhoneNumberCount";
-                        workSheet.Cell("B1").Value = queryResult.Location;
-                        workSheet.Cell("B2").Value = queryResult.ContactCount;
-                        workSheet.Cell("B3").Value = queryResult.PhoneNumberCount;
+                        workSheet.Cell(1, 1).Value = "Location";
+                        workSheet.Cell(1, 2).Value = "ContactCount";
+                        workSheet.Cell(1, 3).Value = "PhoneNumberCount";
+                        int row = 2;
 
-                        if (!Directory.Exists("~/reports"))
-                            Directory.CreateDirectory("~/reports");
+                        foreach (ReportDetailDto data in reportData)
+                        {
+                            workSheet.Cell(row, 1).Value = data.Location;
+                            workSheet.Cell(row, 2).Value = data.ContactCount;
+                            workSheet.Cell(row, 3).Value = data.PhoneNumberCount;
 
-                        workBook.SaveAs($"~/reports/report_{reportId}.xlsx");
+                            row++;
+                        }
+
+                        string path = AppDomain.CurrentDomain.BaseDirectory + "reports";
+                        if (!Directory.Exists(path))
+                            Directory.CreateDirectory(path);
+
+                        workBook.SaveAs($"{path}/report_{reportId}.xlsx");
+
+                        Report report = _reportService.GetById(Guid.Parse(reportId));
+                        report.status = ReportStatus.Completed;
+                        _reportService.Update(report);
                     }
 
                     _channel.BasicAck(ea.DeliveryTag, false);
