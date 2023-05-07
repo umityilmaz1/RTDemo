@@ -14,21 +14,22 @@ namespace Api.Controllers
         private readonly ILogger<ReportController> _logger;
         private readonly IMapper _mapper;
         private readonly IReportService _reportService;
+        private readonly IRabbitmqProducerService _rabbitmqProducerService;
 
-        public ReportController(ILogger<ReportController> logger, IMapper mapper, IReportService reportService)
+        public ReportController(ILogger<ReportController> logger, IMapper mapper, IReportService reportService, IRabbitmqProducerService rabbitmqProducerService)
         {
             _logger = logger;
             _mapper = mapper;
             _reportService = reportService;
+            _rabbitmqProducerService = rabbitmqProducerService;
         }
 
-        //[HttpPost(nameof(RequestReport))]
-        //public IActionResult RequestReport(Guid contactId)
-        //{
-        //    Report contact = _mapper.Map<Report>(dto);
-        //    _contactService.Create(contact);
-        //    return Ok();
-        //}
+        [HttpPost(nameof(RequestReport))]
+        public IActionResult RequestReport(Guid contactId)
+        {
+            _rabbitmqProducerService.SendProductMessage(contactId);
+            return Ok();
+        }
 
 
         [HttpGet(nameof(GetReports))]
