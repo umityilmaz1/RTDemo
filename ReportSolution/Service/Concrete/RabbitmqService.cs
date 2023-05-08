@@ -18,7 +18,7 @@ namespace Service.Concrete
         {
             var factory = new ConnectionFactory
             {
-                HostName = "localhost",
+                HostName = "172.17.0.1",
                 Port = 5673
             };
             var connection = factory.CreateConnection();

@@ -50,7 +50,7 @@ namespace Api.Controllers
             string path = AppDomain.CurrentDomain.BaseDirectory + "reports";
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
-            //LoadOptions.DefaultGraphicEngine = new DefaultGraphicEngine("truetype");
+            LoadOptions.DefaultGraphicEngine = new DefaultGraphicEngine("truetype");
             using var workBook = new XLWorkbook($"{path}/report_{reportId}.xlsx");
             var workSheet = workBook.Worksheet("Rapor");
             int lastrow = workSheet.LastRowUsed().RowNumber();
