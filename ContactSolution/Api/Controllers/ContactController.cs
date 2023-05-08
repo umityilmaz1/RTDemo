@@ -73,11 +73,11 @@ namespace Api.Controllers
         }
 
         [HttpGet(nameof(GetContactsWithContactInformations))]
-        public IActionResult GetContactsWithContactInformations()
+        public IActionResult GetContactsWithContactInformations(Guid contactId)
         {
-            IList<Contact> contacts = _contactService.GetList().ToList();
-            IList<ContactListWithContactInformationsDto> contactsDto = _mapper.Map<IList<ContactListWithContactInformationsDto>>(contacts);
-            return new JsonResult(contactsDto);
+            Contact contact = _contactService.GetById(contactId);
+            ContactListWithContactInformationsDto contactDto = _mapper.Map<ContactListWithContactInformationsDto>(contact);
+            return new JsonResult(contactDto);
         }
 
         [HttpGet(nameof(GetReport))]
@@ -94,7 +94,7 @@ namespace Api.Controllers
                 {
                     Location = location,
                     ContactCount = contactInSpesificLocation.Count(),
-                    PhoneNumberCount = contactInSpesificLocation.Sum(a => a.ContactInformations.Count(b => b.Type == Enums.ContactInformationType.Phone))
+                    PhoneNumberCount = contactInSpesificLocation.Sum(a => a.ContactInformations.Where(a => a.IsActive).Count(b => b.Type == Enums.ContactInformationType.Phone))
                 };
                 reportData.Add(data);
             }

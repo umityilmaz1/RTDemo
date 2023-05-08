@@ -1,0 +1,50 @@
+version: "1"
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: 'rabbitmq_demo'
+    hostname: 'rabbithost'
+    ports:
+        - 5673:5672
+        - 15673:15672
+    network_mode: bridge
+  postgres:
+    image: postgres
+    container_name: 'postgresql_demo'
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 12345aA.
+    ports:
+      - 5433:5432
+    network_mode: bridge
+  contactapi:
+    image: contactapi
+    build:
+      context: .\contactsolution
+      dockerfile: api\Dockerfile
+    container_name: contactapi
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+    ports:
+      - 32787:80
+    network_mode: bridge
+    depends_on:
+      - postgres    
+  reportapi:
+    image: reportapi
+    build:
+      context: .\reportsolution
+      dockerfile: api\Dockerfile
+    container_name: reportapi
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+    ports:
+      - 32790:80
+    network_mode: bridge
+    depends_on:
+      - postgres
+      - rabbitmq
+      - contactapi
+    restart: always
+
+

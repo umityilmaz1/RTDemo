@@ -29,12 +29,17 @@ namespace Api.BackgroundServices
         {
             _connectionFactory = new ConnectionFactory
             {
-                HostName = "localhost",
+                HostName = "172.17.0.1",
                 Port = 5673,
                 DispatchConsumersAsync = true
             };
             _connection = _connectionFactory.CreateConnection();
             _channel = _connection.CreateModel();
+            _channel.QueueDeclare(_queueName,
+                                    durable: false,
+                                    exclusive: false,
+                                    autoDelete: false,
+                                    arguments: null);
             _channel.QueueDeclarePassive(_queueName);
             _channel.BasicQos(0, 1, false);
 
@@ -53,7 +58,7 @@ namespace Api.BackgroundServices
                 try
                 {
 
-                    var client = new RestClient("http://localhost:5164");
+                    var client = new RestClient("http://172.17.0.1:32787");
                     var request = new RestRequest($"/api/contact/getreport", Method.Get);
                     var reportData = client.Execute<List<ReportDetailDto>>(request).Data;
 

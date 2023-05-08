@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Model.Base;
 using Model.Entities;
 using Repository.Context.Configurations;
+using System.Reflection.Emit;
 
 namespace Repository.Context
 {
@@ -30,7 +31,8 @@ namespace Repository.Context
             builder.ApplyConfigurationsFromAssembly(typeof(RTDemoContext).Assembly);
             builder.ApplyConfiguration(new ContactInformationConfiguration());
             builder.ApplyConfiguration(new ContactConfiguration());
-            builder.Seed();
+            builder.Entity<Contact>().HasQueryFilter(e => e.IsActive);
+            builder.Entity<ContactInformation>().HasQueryFilter(e => e.IsActive);
             base.OnModelCreating(builder);
         }
         public override int SaveChanges()

@@ -11,7 +11,7 @@ namespace Api.AutoMapperConfigurations
             CreateMap<Contact, ContactCreateDto>().ReverseMap();
             CreateMap<Contact, ContactUpdateDto>().ReverseMap();
             CreateMap<Contact, ContactListDto>().ReverseMap();
-            CreateMap<Contact, ContactListWithContactInformationsDto>().ReverseMap();
+            CreateMap<Contact, ContactListWithContactInformationsDto>().ForMember(dest => dest.ContactInformations, opt => opt.MapFrom(src => src.ContactInformations.Where(a => a.IsActive))).ReverseMap();
         }
     }
 }
