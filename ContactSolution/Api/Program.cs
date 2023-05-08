@@ -12,14 +12,6 @@ builder.Services.AddAutoMapper(typeof(ContactInformationConfiguration));
 
 Service.DI.DependencyLoader.Load(builder.Services);
 
-//builder.Services.AddDbContext<RTDemoContext>(options =>
-//{
-//    options.UseLazyLoadingProxies().UseNpgsql(builder.Configuration.GetConnectionString("Default"), builder =>
-//    {
-//        builder.MigrationsAssembly(Assembly.GetAssembly(typeof(RTDemoContext)).GetName().Name);
-//    });
-//});
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

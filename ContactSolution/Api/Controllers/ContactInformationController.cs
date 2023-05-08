@@ -30,7 +30,6 @@ namespace Api.Controllers
         public IActionResult Create(ContactInformationCreateDto dto) 
         { 
             ContactInformation contactInformation = _mapper.Map<ContactInformation>(dto);
-            //contactInformation.Contact = _contactService.GetById(dto.ContactId);
             _contactInformationService.Create(contactInformation);
             return Ok();
         }
