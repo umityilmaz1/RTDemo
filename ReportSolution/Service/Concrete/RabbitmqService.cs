@@ -11,7 +11,6 @@ namespace Service.Concrete
     internal class RabbitmqService : IRabbitmqService
     {
         private readonly IModel _channel;
-        //private readonly EventingBasicConsumer _consumer;
         private const string _queueName = "report";
         private const string _routingKey = "report";
 
@@ -19,7 +18,7 @@ namespace Service.Concrete
         {
             var factory = new ConnectionFactory
             {
-                HostName = "172.17.0.1",
+                HostName = "localhost",
                 Port = 5673
             };
             var connection = factory.CreateConnection();
@@ -30,15 +29,7 @@ namespace Service.Concrete
                                     autoDelete: false,
                                     arguments: null);
 
-            //_consumer = new EventingBasicConsumer(_channel);
-            //_consumer.Received += (model, ea) =>
-            //{
-            //    var body = ea.Body.ToArray();
-            //    var message = Encoding.UTF8.GetString(body);
-            //    var a = 5;
-            //};
-            //_channel.BasicConsume(queue: _queueName, autoAck: true, consumer: _consumer);
-            //_channel.BasicQos(0, 1, false);
+
         }
 
         public void ProduceMessage<T>(T message)
