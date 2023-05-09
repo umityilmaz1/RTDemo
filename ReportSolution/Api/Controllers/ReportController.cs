@@ -51,8 +51,6 @@ namespace Api.Controllers
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
             LoadOptions.DefaultGraphicEngine = new DefaultGraphicEngine("arial");
-            //LoadOptions options = new LoadOptions() { GraphicEngine = new DefaultGraphicEngine("truetype") };
-
             using var workBook = new XLWorkbook($"{path}/report_{reportId}.xlsx");
             var workSheet = workBook.Worksheet("Rapor");
             int lastrow = workSheet.LastRowUsed().RowNumber();
